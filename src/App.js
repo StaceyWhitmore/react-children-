@@ -3,26 +3,37 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+
+  const {Children, PropTypes} = React
+  const {render} = ReactDOM
+
+  const findChild = (children, child) =>
+    Children.toArray(children)
+      .filter(c => c.type === child)[0]
+
+  const WhenTruthy = ({children}) =>
+    Children.only(children)
+
+  //Although this variable is set to the Same value as the last one their child content (inner html) differs as you will see in the JSX
+  const WhenFalsy = ({children}) =>
+      Children.only(children)
+
+  const Display = ({ifTruthy=true, children}) =>
+    (ifTruthy) ?
+      findChild(children,WhenTruthy) :
+      findChild(children,WhenFalsy)
+
+   const age = 19
+
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+
     );
-  }
-}
+  }//close render()
+
+
+}//close <App />
 
 export default App;
